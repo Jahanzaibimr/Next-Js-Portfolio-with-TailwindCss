@@ -1,0 +1,76 @@
+import "./App.css";
+import { RadioGroup, RadioOption } from "./Radio";
+import { useState } from "react";
+
+function App() {
+  const [selected, setSelected] = useState("");
+  return (
+    <div className="App">
+      <h2>How did you hear about Little Lemon?</h2>
+      <RadioGroup onChange={setSelected} selected={selected}>
+        <RadioOption value="social_media">Social Media</RadioOption>
+        <RadioOption value="friends">Friends</RadioOption>
+        <RadioOption value="advertising">Advertising</RadioOption>
+        <RadioOption value="other">Other</RadioOption>
+      </RadioGroup>
+      <button disabled={!selected}>Submit</button>
+    </div>
+  );
+}
+
+export default App;
+
+
+
+
+///////////////////////////////////////////////////////////
+
+<RadioOption checked={false} onChange={handleOnChange} value="1" />
+<RadioOption checked={true} onChange={handleOnChange} value="2" />
+<RadioOption checked={false} onChange={handleOnChange} value="3" />
+
+
+////////////////////////////////////////////////////////////////
+
+The RadioGroup component can then leverage the children prop and use both React.cloneElement and React.Children.map to internally pass the checked and onChange props to each RadioOption child.
+
+<RadioGroup selected={selectedValue} onChange={handleOnChange}>
+  <RadioOption value="1" />
+  <RadioOption value="2" />
+  <RadioOption value="3" />
+</RadioGroup>
+
+
+
+//////////////////////////////////////////////////////////////////
+
+
+
+
+Step 1
+If you run npm start and view the app in the browser you'll notice that the starting React app works as is. The app outputs a simple view with a header and a submit button, but no radio options yet.
+
+
+Open the App.js file. In there you will already see the desired API for the RadioGroup and RadioOption components. At the moment, they don't render anything on the screen. You don't have to change anything in this file, but just understand the set of props involved in the component design.
+
+Step 2
+Open the Radio/index.js file. Implement the remaining bits for the RadioGroup component. The RadioOptions variable is initially set to null. Instead, use React.Children.map to iterate over the children and clone each child using React.cloneElement. The result should be assigned to the RadioOptions variable.
+
+Each cloned child should receive two additional props, checked and onChange.
+
+Step 3
+Open the Radio/index.js file. The RadioOption component is incomplete. In particular, it's missing some props in the input element that it renders:  value, checked and onChange.
+
+The RadioOption component already receives all those props. Your goal is to connect them to the input element.
+
+When adding the onChange prop to the radio input, which represents the event that gets triggered whenever you interact with it, you can access the value property of the event target to get the value of the newly selected radio option, as per the code below.
+
+
+
+const handleChange = (e) => {
+  const newValueSelected = e.target.value
+}
+
+
+///////////////////////////////////////////////////////////////////
+

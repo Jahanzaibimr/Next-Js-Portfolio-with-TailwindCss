@@ -1,0 +1,71 @@
+Used in life time work is npm and npx is one time run:
+npm i create-react-app Codewithjahanzaib
+npx i create-react-app Codewithjahanzaib
+npm init
+npm i express                this is express.js
+npm i mongoose               this is mongodb
+
+
+Ai Tools: 
+Replica
+adobe podcast
+
+
+JAVASCRIPT: MOST IMPORTANT : Let myVariable=there used to show anything;
+
+JAVASCRIPT:<div>{myVariable}</div> show here this upper things; 
+
+props is used into passing there file
+
+
+
+coding vs code 
+ctrl+f  change words
+
+react code 
+()=>arrow function,
+
+Import React {usestate,useEffect,useRef,}from 'react'
+
+props,const,if,else,async,onchange,await,value,target,
+props.showAlert,button.btn.primary
+invalid credentials,
+comment// this is work on all words is off
+
+Navbar used in Const state= useSelector(state => state.state)
+return (
+
+bindActionCreators is used in small words
+
+folders react
+Components:
+notes.js
+about.js
+addnote.js
+Alert.js
+Home.js
+Login.js
+signup.js
+Navbar.js
+Noteitem.js
+App.js
+index.js
+
+Reducers:Redux:ApplyMiddleware(thunk)
+Store.js
+index.js
+
+
+
+Context/notes            more files is used in notecontext.js
+ noteContext.js
+ notestate.js
+
+
+
+App.css,index.html,
+authToken:localStorage.getItem('token')
+
+
+Short Words:
+Rafce,

@@ -1,0 +1,326 @@
+useState function 
+import { useState } from "react"; 
+ 
+export default function App() { 
+  const [greeting, setGreeting] = useState({ greet: "Hello, World" }); 
+  console.log(greeting, setGreeting); 
+ 
+  function updateGreeting() { 
+    setGreeting({ greet: "Hello, World-Wide Web" }); 
+  } 
+ 
+  return ( 
+    <div> 
+      <h1>{greeting.greet}</h1> 
+      <button onClick={updateGreeting}>Update greeting</button> 
+    </div> 
+  ); 
+} 
+
+
+
+
+
+New Function of useState
+
+import { useState } from "react";
+
+export default function App() {
+  const [giftCard, setGiftCard] = useState(
+    {
+        firstName: "Jennifer",
+        lastName: "Smith",
+        text: "Free dinner for 4 guests",
+        valid: true,
+        instructions: "To use your coupon, click the button below.",
+    }
+  );
+
+  function spendGiftCard() {
+
+  }
+
+  return (
+    <div style={{padding: '40px'}}>
+      <h1>
+        Gift Card Page
+      </h1>
+      <h2>
+        Customer: {giftCard.firstName} {giftCard.lastName}
+      </h2>
+      <h3>
+        {giftCard.text}
+      </h3>
+      <p>
+        {giftCard.instructions}
+      </p>
+      {
+        giftCard.valid && (
+          <button onClick={spendGiftCard}>
+            Spend Gift Card
+          </button>
+        )
+      }
+    </div>
+  );
+}
+
+
+
+
+
+useEffect hook:
+
+function MenuPage(props) { 
+  const [data, setData] = useState([]); 
+
+  useEffect(() => { 
+    document.title = 'Little Lemon'; 
+  }, []); 
+
+  useEffect(() => { 
+    fetch(`https://littlelemon/menu/${id}`) 
+      .then(response => response.json()) 
+      .then(json => setData(json)); 
+  }, [props.id]); 
+
+  // ... 
+} 
+
+
+
+
+
+
+
+SOLUTION MANAGEMENT WITHIN A COMPONENT:
+
+import { useState } from "react";
+
+export default function App() {
+  const [giftCard, setGiftCard] = useState(
+    {
+        firstName: "Jennifer",
+        lastName: "Smith",
+        text: "Free dinner for 4 guests",
+        valid: true,
+        instructions: "To use your coupon, click the button below.",
+    }
+  );
+
+  function spendGiftCard() {
+    setGiftCard(prevState => {
+        return {
+          ...prevState,
+          text: "Your coupon has been used.",
+          valid: false,
+          instructions: "Please visit our restaurant to renew your gift card.",
+        }
+    });
+  }
+
+  return (
+    <div style={{padding: '40px'}}>
+      <h1>
+        Gift Card Page
+      </h1>
+      <h2>
+        Customer: {giftCard.firstName} {giftCard.lastName}
+      </h2>
+      <h3>
+        {giftCard.text}
+      </h3>
+      <p>
+        {giftCard.instructions}
+      </p>
+      {
+        giftCard.valid && (
+          <button onClick={spendGiftCard}>
+            Spend Gift Card
+          </button>
+        )
+      }
+    </div>
+  );
+}
+
+
+
+
+
+
+
+
+
+DATA FETCHING USING HOOKS:
+
+
+import { useState, useEffect } from "react"; 
+ 
+export default function App() { 
+  const [btcData, setBtcData] = useState({}); 
+  useEffect(() => { 
+    fetch(`https://api.coindesk.com/v1/bpi/currentprice.json`) 
+      .then((response) => response.json()) 
+      .then((jsonData) => setBtcData(jsonData.bpi.USD)) 
+      .catch((error) => console.log(error)); 
+  }, []); 
+ 
+  return ( 
+    <> 
+      <h1>Current BTC/USD data</h1> 
+      <p>Code: {btcData.code}</p> 
+      <p>Symbol: {btcData.symbol}</p> 
+      <p>Rate: {btcData.rate}</p> 
+      <p>Description: {btcData.description}</p> 
+      <p>Rate Float: {btcData.rate_float}</p> 
+    </> 
+  ); 
+} 
+
+
+
+
+
+
+2ND FETCH CODE:
+
+import { useState, useEffect } from "react"; 
+ 
+export default function App() { 
+  const [btcData, setBtcData] = useState({}); 
+ 
+  const fetchData = () => { 
+    fetch(`https://api.coindesk.com/v1/bpi/currentprice.json`) 
+      .then((response) => response.json()) 
+      .then((jsonData) => setBtcData(jsonData.bpi.USD)) 
+      .catch((error) => console.log(error)); 
+  }; 
+ 
+  useEffect(() => { 
+    fetchData(); 
+  }, []); 
+ 
+  return ( 
+    <> 
+      <h1>Current BTC/USD data</h1> 
+      <p>Code: {btcData.code}</p> 
+      <p>Symbol: {btcData.symbol}</p> 
+      <p>Rate: {btcData.rate}</p> 
+      <p>Description: {btcData.description}</p> 
+      <p>Rate Float: {btcData.rate_float}</p> 
+    </> 
+  ); 
+} 
+
+
+
+/////////////////////////////////////////
+
+CAN YOU FETCH THIS DATA:
+
+
+import React from "react";
+
+function App() {
+  const [user, setUser] = React.useState([]);
+
+  const fetchData = () => {
+
+  };
+
+  React.useEffect(() => {
+    fetchData();
+  }, []);
+
+  return Object.keys(user).length > 0 ? (
+    <div style={{padding: "40px"}}>
+      <h1>Customer data</h1>
+
+    </div>
+  ) : (
+    <h1>Data pending...</h1>
+  );
+}
+
+export default App;
+
+
+////////////////////////////////////////////
+
+HOW TO FETCH THE FILES:
+
+import React from "react";
+
+function App() {
+  const [user, setUser] = React.useState([]);
+
+  const fetchData = () => {
+
+  };
+
+  React.useEffect(() => {
+    fetchData();
+  }, []);
+
+  return Object.keys(user).length > 0 ? (
+    <div>
+      <h1>Customer data</h1>
+
+    </div>
+  ) : (
+    <h1>Data pending...</h1>
+  );
+}
+
+export default App;
+
+//////////////////////////////////////////////
+
+<MyComponent>{'Little Lemon'}</MyComponent>
+
+JAVASCRIPT EXPRESSION OF JSX
+
+
+function Dessert(props) {
+  return <li>{props.title}</li>;
+}
+
+function List() {
+  const desserts = ['tiramisu', 'ice cream', 'cake'];
+  return (
+    <ul>
+      {desserts.map((dessert) => <Item key={dessert} title={dessert} />)}
+    </ul>
+  );
+}
+
+
+/////////////////////////////////////////////////
+
+SHOWMODAL
+
+<div>
+  {showModal && <Modal />}
+</div>
+
+/////////////////////////////////////////////
+
+To fix this, you need to make sure the expression before && is always boolean:
+
+<div>
+  {props.desserts.length > 0 &&
+    <DessertList desserts={props.desserts} />
+  }
+</div>
+
+<div>
+  {!!props.desserts.length &&
+    <DessertList desserts={props.desserts} />
+  }
+</div>
+
+///////////////////////////////////////////////////
+
+
+

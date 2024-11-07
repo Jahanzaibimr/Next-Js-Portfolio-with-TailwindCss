@@ -1,0 +1,184 @@
+This example shows that in order to fetch data from a third party API, you need to pass an anonymous function as a call to the useEffect hook. 
+
+useEffect:
+
+
+useEffect( 
+    () => { 
+        // ... data fetching code goes here 
+    }, 
+    [] 
+); 
+
+
+
+///////////////////////////////////////////////////////
+
+
+One additional thing that can be discussed here is the return statement of the above example.
+
+ return someStateVariable.length > 0 ? ( 
+    <div> 
+      <h1>Data returned:</h1> 
+      <h2>{someStateVariable.results[0].price}</h2> 
+    </div> 
+  ) : ( 
+    <h1>Data pending...</h1> 
+  ); 
+
+
+
+//////////////////////////////////////////////////
+
+If the someStateVariable is initialized as an empty array, passed to the call to the useState hook, then it would be possible to update this state variable with an array item that might get returned from a fetch() call to a third-party JSON data provider.
+
+If this works out as described above, the length of the someStateVariable would increase from the starting length of zero - because an empty array's length is zero.
+
+Let's inspect the conditional return again:
+
+
+
+ return someStateVariable.length > 0 ? ( 
+    <div> 
+      <h1>Data returned:</h1> 
+      <h2>{someStateVariable.results[0].price}</h2> 
+    </div> 
+  ) : ( 
+    <h1>Data pending...</h1> 
+  ); 
+
+
+
+////////////////////////////////////////////////////
+
+CUSTOM HOOKS:useState:
+
+import { useState } from "react"; 
+ 
+function App() { 
+  const [count, setCount] = useState(0); 
+ 
+  function increment() { 
+    setCount(prevCount => prevCount + 1) 
+  } 
+ 
+  return ( 
+    <div> 
+      <h1>Count: {count}</h1> 
+      <button onClick={increment}>Plus 1</button> 
+    </div> 
+  ); 
+} 
+ 
+export default App; 
+
+
+///////////////////////////////////////////////////////
+
+useEffect HOOK:
+
+import { useEffect } from "react";
+
+function useConsoleLog(varName) {
+  useEffect(() => {
+    console.log(varName);
+  }, [varName]);
+}
+
+export default useConsoleLog;
+
+
+////////////////////////////////////////////////////////
+
+
+CONSOLE.LOG COUNT :
+
+import { useState } from "react";
+import useConsoleLog from "./useConsoleLog";
+
+function App() {
+  const [count, setCount] = useState(0);
+  useConsoleLog(count);
+
+  function increment() {
+    setCount(prevCount => prevCount + 1);
+  }
+
+  return (
+    <div>
+      <h1>Count: {count}</h1>
+      <button onClick={increment}>Plus 1</button>
+    </div>
+  );
+}
+
+export default App;
+
+
+////////////////////////////////////////////////////////
+
+IMPORT useState ,useEffect, useRef  CODES:
+
+import { useState, useEffect, useRef } from "react";
+export default function App() {
+  const [day, setDay] = useState("Monday");
+  const prevDay = usePrevious(day);
+  const getNextDay = () => {
+    if (day === "Monday") {
+      setDay("Tuesday")
+    } else if (day === "Tuesday") {
+      setDay("Wednesday")
+    } else if (day === "Wednesday") {
+      setDay("Thursday")
+    } else if (day === "Thursday") {
+      setDay("Friday")
+    } else if (day === "Friday") {
+      setDay("Monday")
+    }
+  }
+  return (
+    <div style={{padding: "40px"}}>
+      <h1>
+        Today is: {day}<br />
+        {
+          prevDay && (
+            <span>Previous work day was: {prevDay}</span>
+          )
+        }
+      </h1>
+      <button onClick={getNextDay}>
+        Get next day
+      </button>
+    </div>
+  );
+}
+function usePrevious(val) {
+
+}
+
+
+//////////////////////////////////////////////////////////////////
+
+useFromic:
+
+import * as Yup from 'yup';
+import { useFormik } from 'formik';
+
+// The below code would go inside a React component
+const {
+  values,
+  errors,
+  touched,
+getFieldProps,
+handleSubmit,
+} = useFormik({
+intialValues: {
+    comment: "",
+  },
+onSubmit: (values) => {
+    // Handle form submission
+  },
+validationSchema: Yup.object({
+    comment: Yup.string().required("Required"),
+  }),
+});
